@@ -1,14 +1,22 @@
 @echo off
-if "%~1"=="" goto help
-if exist "%~dp0%~1.cmd" (
-    call "%~dp0%~1.cmd"
+setlocal enabledelayedexpansion
+
+:: Grab the first argument
+set "COMMAND=%~1"
+
+:: If empty, show help
+if "%COMMAND%"=="" goto show_help
+
+:: Check if the specific command file exists in the toolkit folder
+if exist "%~dp0%COMMAND%.cmd" (
+    call "%~dp0%COMMAND%.cmd"
     goto :eof
 ) else (
-    echo [!] Unknown command: %1
-    goto help
+    echo [!] Unknown tool command: %COMMAND%
+    goto show_help
 )
 
-:help
+:show_help
 echo =======================================================
 echo               KIMARO PROFESSIONAL TOOLKIT              
 echo =======================================================
@@ -18,3 +26,4 @@ echo Available Commands:
 echo   netst    - Network Diagnostic
 echo   greet    - Runs greeting code test
 echo =======================================================
+goto :eof
