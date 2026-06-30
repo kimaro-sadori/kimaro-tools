@@ -1,5 +1,10 @@
-(
-echo @echo off
-echo echo [*] Running Advanced Network Diagnostics...
-echo powershell -NoProfile -ExecutionPolicy Bypass -Command "Write-Host '--- LOCAL IP ADAPTERS ---' -ForegroundColor Cyan; Get-NetIPAddress -AddressFamily IPv4 | Select-Object IPAddress, InterfaceAlias; Write-Host '--- TESTING INTERNET CONNECTIVITY ---' -ForegroundColor Yellow; Test-Connection -ComputerName google.com -Count 2 | Select-Object Address, ResponseTime"
-) > netst.cmd
+@echo off
+echo [*] Running Network Diagnostic...
+echo ------------------------------------------
+echo [1] Checking local IP configuration...
+ipconfig | findstr /i "ipv4 description default"
+echo.
+echo [2] Testing internet connectivity (Ping 8.8.8.8)...
+ping -n 2 8.8.8.8 | findstr /i "reply loss"
+echo ------------------------------------------
+exit /b
