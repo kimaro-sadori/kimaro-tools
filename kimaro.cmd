@@ -1,22 +1,22 @@
 @echo off
-setlocal enabledelayedexpansion
+set "CMD_ARG=%~1"
 
-:: Grab the first argument
-set "COMMAND=%~1"
+:: If no argument is passed, show the menu
+if "%CMD_ARG%"=="" goto menu
 
-:: If empty, show help
-if "%COMMAND%"=="" goto show_help
-
-:: Check if the specific command file exists in the toolkit folder
-if exist "%~dp0%COMMAND%.cmd" (
-    call "%~dp0%COMMAND%.cmd"
-    goto :eof
-) else (
-    echo [!] Unknown tool command: %COMMAND%
-    goto show_help
+:: Check for subcommands safely
+if /i "%CMD_ARG%"=="netst" (
+    call "%~dp0netst.cmd"
+    exit /b
+)
+if /i "%CMD_ARG%"=="greet" (
+    call "%~dp0greet.cmd"
+    exit /b
 )
 
-:show_help
+echo [!] Unknown command: %CMD_ARG%
+
+:menu
 echo =======================================================
 echo               KIMARO PROFESSIONAL TOOLKIT              
 echo =======================================================
@@ -26,4 +26,4 @@ echo Available Commands:
 echo   netst    - Network Diagnostic
 echo   greet    - Runs greeting code test
 echo =======================================================
-goto :eof
+exit /b
