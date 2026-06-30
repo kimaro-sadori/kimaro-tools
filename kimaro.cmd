@@ -1,23 +1,20 @@
-(
-echo @echo off
-echo set "TOOL_DIR=%%~dp0"
-echo if "%%~1"=="" goto help
-echo if exist "%%TOOL_DIR%%%%~1.cmd" ^(
-echo     call "%%TOOL_DIR%%%%~1.cmd" %%*
-echo     goto :eof
-echo ^) else ^(
-echo     echo [!] Unknown command: %%1
-echo     goto help
-echo ^)
-echo :help
+@echo off
+if "%~1"=="" goto help
+if exist "%~dp0%~1.cmd" (
+    call "%~dp0%~1.cmd"
+    goto :eof
+) else (
+    echo [!] Unknown command: %1
+    goto help
+)
+
+:help
 echo =======================================================
 echo               KIMARO PROFESSIONAL TOOLKIT              
 echo =======================================================
 echo Usage: kimaro [command]
 echo.
 echo Available Commands:
-echo   netst    - Network Diagnostic ^(ping okda adrare ^)
-echo   greet    - z3ma 5dam okda
+echo   netst    - Network Diagnostic
+echo   greet    - Runs greeting code test
 echo =======================================================
-echo goto :eof
-) > kimaro.cmd
