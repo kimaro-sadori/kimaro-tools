@@ -1,4 +1,5 @@
 @echo off
 echo [*] Installing Kimaro Toolkit...
-copy /Y "%~dp0*.cmd" C:\Windows\ >nul
+if not exist "%USERPROFILE%\AppData\Local\Microsoft\WindowsApps" mkdir "%USERPROFILE%\AppData\Local\Microsoft\WindowsApps"
+copy /Y "%~dp0*.cmd" "%USERPROFILE%\AppData\Local\Microsoft\WindowsApps\" >nul
 echo [+] Setup Complete!
