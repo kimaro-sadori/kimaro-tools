@@ -1,4 +1,6 @@
-(
-echo @echo off
-echo echo hi i am iliass and this is my first code test
-) > greet.cmd
+@echo off
+echo ==========================================
+echo Hello, Iliass! The Kimaro Toolkit is working.
+echo Time: %TIME% | Date: %DATE%
+echo ==========================================
+exit /b
